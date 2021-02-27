@@ -1,0 +1,17 @@
+{
+    "name": "laranz/luna-core",
+    "description": "Handle the core functionality of Luna Framework.",
+    "type": "project",
+    "authors": [
+        {
+            "name": "laranz",
+            "email": "laranz.joe@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload":{
+        "psr-4": {"Luna\\Inc\\": "./inc"},
+        "classmap": ["./inc"]
+    }
+}
