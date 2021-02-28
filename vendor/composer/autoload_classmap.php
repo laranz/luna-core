@@ -7,11 +7,13 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'Luna\\Inc\\Base\\Activator' => $baseDir . '/inc/Base/class-activator.php',
-    'Luna\\Inc\\Base\\Custom_Post' => $baseDir . '/inc/Base/class-custom-post.php',
-    'Luna\\Inc\\Base\\Deactivator' => $baseDir . '/inc/Base/class-deactivator.php',
-    'Luna\\Inc\\Base\\Enqueue' => $baseDir . '/inc/Base/class-enqueue.php',
-    'Luna\\Inc\\Base\\Settings_Link' => $baseDir . '/inc/Base/class-settings-link.php',
-    'Luna\\Inc\\Init' => $baseDir . '/inc/class-init.php',
-    'Luna\\Inc\\Pages\\Admin' => $baseDir . '/inc/Pages/class-admin.php',
+    'Luna\\Api\\SettingsApi' => $baseDir . '/inc/Api/class-settingsapi.php',
+    'Luna\\Base\\Activator' => $baseDir . '/inc/Base/class-activator.php',
+    'Luna\\Base\\Base_Controller' => $baseDir . '/inc/Base/class-base-controller.php',
+    'Luna\\Base\\Custom_Post' => $baseDir . '/inc/Base/class-custom-post.php',
+    'Luna\\Base\\Deactivator' => $baseDir . '/inc/Base/class-deactivator.php',
+    'Luna\\Base\\Enqueue' => $baseDir . '/inc/Base/class-enqueue.php',
+    'Luna\\Base\\Settings_Link' => $baseDir . '/inc/Base/class-settings-link.php',
+    'Luna\\Init' => $baseDir . '/inc/class-init.php',
+    'Luna\\Pages\\Admin' => $baseDir . '/inc/Pages/class-admin.php',
 );

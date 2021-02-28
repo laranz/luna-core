@@ -11,7 +11,7 @@
     "minimum-stability": "dev",
     "require": {},
     "autoload":{
-        "psr-4": {"Luna\\Inc\\": "./inc"},
+        "psr-4": {"Luna\\": "./inc"},
         "classmap": ["./inc"]
     }
 }

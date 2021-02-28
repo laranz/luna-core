@@ -6,4 +6,4 @@
  */
 
 ?>
-<h1>Shit Happens</h1>
+<h1>Luna Settings</h1>

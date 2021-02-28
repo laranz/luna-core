@@ -8,7 +8,7 @@
  * @since           0.1.0
  */
 
-namespace Luna\Inc;
+namespace Luna;
 
 /**
  * The core plugin class.

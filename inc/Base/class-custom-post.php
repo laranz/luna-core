@@ -8,7 +8,7 @@
  * @since           0.1.0
  */
 
-namespace Luna\Inc\Base;
+namespace Luna\Base;
 
 /**
  * A wrapper class for Custom Post Type.

@@ -8,7 +8,7 @@
  * @since           0.1.0
  */
 
-namespace Luna\Inc\Base;
+namespace Luna\Base;
 
 /**
  * This class defines all code necessary to run during the plugin's activation.

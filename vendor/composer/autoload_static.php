@@ -9,12 +9,12 @@ class ComposerStaticInit5936206eda487225ea0867baa7db8cfe
     public static $prefixLengthsPsr4 = array (
         'L' => 
         array (
-            'Luna\\Inc\\' => 9,
+            'Luna\\' => 5,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Luna\\Inc\\' => 
+        'Luna\\' => 
         array (
             0 => __DIR__ . '/../..' . '/inc',
         ),
@@ -22,13 +22,15 @@ class ComposerStaticInit5936206eda487225ea0867baa7db8cfe
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Luna\\Inc\\Base\\Activator' => __DIR__ . '/../..' . '/inc/Base/class-activator.php',
-        'Luna\\Inc\\Base\\Custom_Post' => __DIR__ . '/../..' . '/inc/Base/class-custom-post.php',
-        'Luna\\Inc\\Base\\Deactivator' => __DIR__ . '/../..' . '/inc/Base/class-deactivator.php',
-        'Luna\\Inc\\Base\\Enqueue' => __DIR__ . '/../..' . '/inc/Base/class-enqueue.php',
-        'Luna\\Inc\\Base\\Settings_Link' => __DIR__ . '/../..' . '/inc/Base/class-settings-link.php',
-        'Luna\\Inc\\Init' => __DIR__ . '/../..' . '/inc/class-init.php',
-        'Luna\\Inc\\Pages\\Admin' => __DIR__ . '/../..' . '/inc/Pages/class-admin.php',
+        'Luna\\Api\\SettingsApi' => __DIR__ . '/../..' . '/inc/Api/class-settingsapi.php',
+        'Luna\\Base\\Activator' => __DIR__ . '/../..' . '/inc/Base/class-activator.php',
+        'Luna\\Base\\Base_Controller' => __DIR__ . '/../..' . '/inc/Base/class-base-controller.php',
+        'Luna\\Base\\Custom_Post' => __DIR__ . '/../..' . '/inc/Base/class-custom-post.php',
+        'Luna\\Base\\Deactivator' => __DIR__ . '/../..' . '/inc/Base/class-deactivator.php',
+        'Luna\\Base\\Enqueue' => __DIR__ . '/../..' . '/inc/Base/class-enqueue.php',
+        'Luna\\Base\\Settings_Link' => __DIR__ . '/../..' . '/inc/Base/class-settings-link.php',
+        'Luna\\Init' => __DIR__ . '/../..' . '/inc/class-init.php',
+        'Luna\\Pages\\Admin' => __DIR__ . '/../..' . '/inc/Pages/class-admin.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

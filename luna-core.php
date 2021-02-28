@@ -43,15 +43,12 @@ if ( file_exists( LUNA_BASE_PATH . '/vendor/autoload.php' ) ) {
 	require_once LUNA_BASE_PATH . '/vendor/autoload.php';
 }
 
-use Luna\Inc\Base\Activator;
-use Luna\Inc\Base\Deactivator;
-
 /**
  * The code that runs during plugin activation.
  * This action is documented in inc/Activator.php
  */
 function activate_luna_core() {
-	Activator::activate();
+	Luna\Base\Activator::activate();
 }
 
 /**
@@ -59,7 +56,7 @@ function activate_luna_core() {
  * This action is documented in inc/Deactivator.php
  */
 function deactivate_luna_core() {
-	Deactivator::deactivate();
+	Luna\Base\Deactivator::deactivate();
 }
 
 // activation.
@@ -75,6 +72,6 @@ register_deactivation_hook( __FILE__, 'deactivate_luna_core' );
  *
  * @since    0.1.0
  */
-if ( class_exists( 'Luna\\Inc\\Init' ) ) {
-	Luna\Inc\Init::register_services();
+if ( class_exists( 'Luna\\Init' ) ) {
+	Luna\Init::register_services();
 }
