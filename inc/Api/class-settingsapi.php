@@ -25,6 +25,13 @@ class SettingsApi {
 	 */
 	public $admin_pages = array();
 
+	/**
+	 * Store subpage array.
+	 *
+	 * @var array
+	 */
+	public $admin_subpages = array();
+
 	/** Register globally. */
 	public function register() {
 		if ( ! empty( $this->admin_pages ) ) {
@@ -38,9 +45,46 @@ class SettingsApi {
 	 * @param array $pages | Page list.
 	 * @return $pages
 	 */
-	public function add_pages( array $pages
-	) {
+	public function add_pages( array $pages ) {
 		$this->admin_pages = $pages;
+		return $this;
+	}
+
+	/**
+	 * Function to add admin sub-pages
+	 *
+	 * @param array $pages | Page list.
+	 * @return $pages
+	 */
+	public function add_subpages( array $pages ) {
+		$this->admin_subpages = array_merge( $this->admin_subpages, $pages );
+		return $this;
+	}
+
+	/**
+	 * Function to register the admin sub-page.
+	 *
+	 * @param string $title | Title for the subpage.
+	 * @return $pages
+	 */
+	public function with_subpage( string $title = '' ) {
+		if ( empty( $this->admin_pages ) ) {
+			return $this;
+		}
+		// Get the first element from the list of admin pages.
+		$admin_page           = current( $this->admin_pages );
+		$subpage              = array(
+			array(
+				'parent_slug' => $admin_page['menu_slug'],
+				'page_title'  => $admin_page['page_title'],
+				'menu_title'  => ( $title ) ? $title : $admin_page['menu_title'],
+				'capability'  => $admin_page['capability'],
+				'menu_slug'   => $admin_page['menu_slug'],
+				'callback'    => $admin_page['callback'],
+				'position'    => 1,
+			),
+		);
+		$this->admin_subpages = $subpage;
 		return $this;
 	}
 
@@ -58,6 +102,17 @@ class SettingsApi {
 				$page['menu_slug'],
 				$page['callback'],
 				$page['icon_url'],
+				$page['position']
+			);
+		}
+		foreach ( $this->admin_subpages as $page ) {
+			add_submenu_page(
+				$page['parent_slug'],
+				$page['page_title'],
+				$page['menu_title'],
+				$page['capability'],
+				$page['menu_slug'],
+				$page['callback'],
 				$page['position']
 			);
 		}
