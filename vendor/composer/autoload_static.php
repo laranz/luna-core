@@ -22,6 +22,7 @@ class ComposerStaticInit5936206eda487225ea0867baa7db8cfe
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Luna\\Api\\Callbacks\\AdminCallbacks' => __DIR__ . '/../..' . '/inc/Api/Callbacks/class-admincallbacks.php',
         'Luna\\Api\\SettingsApi' => __DIR__ . '/../..' . '/inc/Api/class-settingsapi.php',
         'Luna\\Base\\Activator' => __DIR__ . '/../..' . '/inc/Base/class-activator.php',
         'Luna\\Base\\Base_Controller' => __DIR__ . '/../..' . '/inc/Base/class-base-controller.php',

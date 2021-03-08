@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'Luna\\Api\\Callbacks\\AdminCallbacks' => $baseDir . '/inc/Api/Callbacks/class-admincallbacks.php',
     'Luna\\Api\\SettingsApi' => $baseDir . '/inc/Api/class-settingsapi.php',
     'Luna\\Base\\Activator' => $baseDir . '/inc/Base/class-activator.php',
     'Luna\\Base\\Base_Controller' => $baseDir . '/inc/Base/class-base-controller.php',

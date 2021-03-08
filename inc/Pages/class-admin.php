@@ -11,6 +11,7 @@
 namespace Luna\Pages;
 
 use Luna\Api\SettingsApi;
+use Luna\Api\Callbacks\AdminCallbacks;
 
 /**
  * A wrapper class for creating admin pages.
@@ -20,13 +21,20 @@ use Luna\Api\SettingsApi;
  * @author          laranz
  */
 class Admin {
-
 	/**
 	 * Storing the SettingsApi instance.
 	 *
 	 * @var [class instance]
 	 */
 	public $settings;
+
+	/**
+	 * Storing the Callbacks instance.
+	 *
+	 * @var [class instance]
+	 */
+	public $callbacks;
+
 
 	/**
 	 * Storing the admin menu page list.
@@ -42,30 +50,47 @@ class Admin {
 	 */
 	public $subpages = array();
 
-	/**
-	 * Constructor.
-	 */
-	public function __construct() {
-		$this->settings = new SettingsApi();
+	/** Register function. */
+	public function register() {
 
+		$this->settings  = new SettingsApi();
+		$this->callbacks = new AdminCallbacks();
+
+		$this->set_pages();
+		$this->set_subpages();
+
+		$this->settings->add_pages( $this->pages )->with_subpage( __( 'Dashboard', 'luna-core' ) )->add_subpages( $this->subpages )->register();
+	}
+	/**
+	 * Settings pages.
+	 *
+	 * @return void
+	 */
+	public function set_pages() {
 		$this->pages = array(
 			'Settings Page' => array(
-				'page_title' => 'Luna Settings',
-				'menu_title' => 'Luna Settings',
+				'page_title' => __( 'Luna Settings', 'luna-core' ),
+				'menu_title' => __( 'Luna Settings', 'luna-core' ),
 				'capability' => 'manage_options',
 				'menu_slug'  => 'luna_settings',
-				'callback'   => function() {
-					echo '<h1>Luna Settings</h1>'; },
+				'callback'   => array( $this->callbacks, 'admin_dashboard' ),
 				'icon_url'   => 'dashicons-store',
 				'position'   => 4,
 			),
 		);
+	}
 
+	/**
+	 * Settings sub pages.
+	 *
+	 * @return void
+	 */
+	public function set_subpages() {
 		$this->subpages = array(
 			'CPT Settings'      => array(
 				'parent_slug' => 'luna_settings',
-				'page_title'  => 'CPT Settings',
-				'menu_title'  => 'CPT Settings',
+				'page_title'  => __( 'CPT Settings', 'luna-core' ),
+				'menu_title'  => __( 'CPT Settings', 'luna-core' ),
 				'capability'  => 'manage_options',
 				'menu_slug'   => 'luna_settings_cpt',
 				'callback'    => function() {
@@ -74,8 +99,8 @@ class Admin {
 			),
 			'Taxonomy Settings' => array(
 				'parent_slug' => 'luna_settings',
-				'page_title'  => 'Taxonomy Settings',
-				'menu_title'  => 'Taxonomy Settings',
+				'page_title'  => __( 'Taxonomy Settings', 'luna-core' ),
+				'menu_title'  => __( 'Taxonomy Settings', 'luna-core' ),
 				'capability'  => 'manage_options',
 				'menu_slug'   => 'luna_settings_taxonomy',
 				'callback'    => function() {
@@ -84,8 +109,8 @@ class Admin {
 			),
 			'Widgets Settings'  => array(
 				'parent_slug' => 'luna_settings',
-				'page_title'  => 'Widgets Settings',
-				'menu_title'  => 'Widgets Settings',
+				'page_title'  => __( 'Widget Settings', 'luna-core' ),
+				'menu_title'  => __( 'WIdget Settings', 'luna-core' ),
 				'capability'  => 'manage_options',
 				'menu_slug'   => 'luna_settings_widgets',
 				'callback'    => function() {
@@ -93,10 +118,5 @@ class Admin {
 				'position'    => 3,
 			),
 		);
-	}
-
-	/** Register function. */
-	public function register() {
-		$this->settings->add_pages( $this->pages )->with_subpage( 'Dashboard' )->add_subpages( $this->subpages )->register();
 	}
 }
