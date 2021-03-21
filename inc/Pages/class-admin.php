@@ -59,6 +59,10 @@ class Admin {
 		$this->set_pages();
 		$this->set_subpages();
 
+		$this->set_settings();
+		$this->set_sections();
+		$this->set_fields();
+
 		$this->settings->add_pages( $this->pages )->with_subpage( __( 'Dashboard', 'luna-core' ) )->add_subpages( $this->subpages )->register();
 	}
 	/**
@@ -110,7 +114,7 @@ class Admin {
 			'Widgets Settings'  => array(
 				'parent_slug' => 'luna_settings',
 				'page_title'  => __( 'Widget Settings', 'luna-core' ),
-				'menu_title'  => __( 'WIdget Settings', 'luna-core' ),
+				'menu_title'  => __( 'Widget Settings', 'luna-core' ),
 				'capability'  => 'manage_options',
 				'menu_slug'   => 'luna_settings_widgets',
 				'callback'    => function() {
@@ -118,5 +122,57 @@ class Admin {
 				'position'    => 3,
 			),
 		);
+	}
+
+	/**
+	 * Set settings for Custom fields.
+	 */
+	public function set_settings() {
+		$args = array(
+			array(
+				'option_group' => 'luna_options_groups',
+				'option_name'  => 'first_name',
+				'callback'     => array( $this->callbacks, 'luna_options_group' ),
+			),
+		);
+
+		$this->settings->add_settings( $args );
+	}
+
+	/**
+	 * Set sections for Custom fields.
+	 */
+	public function set_sections() {
+		$args = array(
+			array(
+				'id'       => 'luna_admin_text',
+				'title'    => __( 'Dashboard Settings', 'luna-core' ),
+				'callback' => array( $this->callbacks, 'luna_admin_section' ),
+				'page'     => 'luna_settings',
+			),
+		);
+
+		$this->settings->add_sections( $args );
+	}
+
+	/**
+	 * Set fields for Custom fields.
+	 */
+	public function set_fields() {
+		$args = array(
+			array(
+				'id'       => 'first_name',
+				'title'    => __( 'First Name', 'luna_core' ),
+				'callback' => array( $this->callbacks, 'luna_first_name' ),
+				'page'     => 'luna_settings',
+				'section'  => 'luna_admin_text',
+				'args'     => array(
+					'label_for' => 'first_name',
+					'class'     => 'luna-text-class',
+				),
+			),
+		);
+
+		$this->settings->add_fields( $args );
 	}
 }

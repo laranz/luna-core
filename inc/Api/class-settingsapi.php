@@ -31,11 +31,32 @@ class SettingsApi {
 	 * @var array
 	 */
 	public $admin_subpages = array();
+	/**
+	 * Store field settings array.
+	 *
+	 * @var array
+	 */
+	public $settings = array();
+	/**
+	 * Store field section array.
+	 *
+	 * @var array
+	 */
+	public $sections = array();
+	/**
+	 * Store fields array.
+	 *
+	 * @var array
+	 */
+	public $fields = array();
 
 	/** Register globally. */
 	public function register() {
 		if ( ! empty( $this->admin_pages ) ) {
 			add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
+		}
+		if ( ! empty( $this->settings ) ) {
+			add_action( 'admin_init', array( $this, 'register_custom_fields' ) );
 		}
 	}
 
@@ -43,7 +64,7 @@ class SettingsApi {
 	 * Function to add admin pages
 	 *
 	 * @param array $pages | Page list.
-	 * @return $pages
+	 * @return SettingsApi object for chaining.
 	 */
 	public function add_pages( array $pages ) {
 		$this->admin_pages = $pages;
@@ -54,7 +75,8 @@ class SettingsApi {
 	 * Function to add admin sub-pages
 	 *
 	 * @param array $pages | Page list.
-	 * @return $pages
+	 *
+	 * @return SettingsApi object for chaining.
 	 */
 	public function add_subpages( array $pages ) {
 		$this->admin_subpages = array_merge( $this->admin_subpages, $pages );
@@ -65,9 +87,10 @@ class SettingsApi {
 	 * Function to register the admin sub-page.
 	 *
 	 * @param string $title | Title for the subpage.
-	 * @return $pages
+	 *
+	 * @return SettingsApi object for chaining.
 	 */
-	public function with_subpage( string $title = '' ) {
+	public function with_subpage( $title = '' ) {
 		if ( empty( $this->admin_pages ) ) {
 			return $this;
 		}
@@ -114,6 +137,79 @@ class SettingsApi {
 				$page['menu_slug'],
 				$page['callback'],
 				$page['position']
+			);
+		}
+	}
+
+	/**
+	 * Function to add settings for Custom fields.
+	 *
+	 * @param array $settings
+	 *
+	 * @return SettingsApi object for chaining.
+	 */
+	public function add_settings( array $settings ) {
+		$this->settings = $settings;
+		return $this;
+	}
+
+	/**
+	 * Function to add sections for Custom fields.
+	 *
+	 * @param array $sections
+	 *
+	 * @return SettingsApi object for chaining.
+	 */
+	public function add_sections( array $sections ) {
+		$this->sections = $sections;
+		return $this;
+	}
+
+	/**
+	 * Function to add fields for Custom fields.
+	 *
+	 * @param array $fields
+	 *
+	 * @return SettingsApi object for chaining.
+	 */
+	public function add_fields( array $fields ) {
+		$this->fields = $fields;
+		return $this;
+	}
+
+	/**
+	 * Register Custom fields.
+	 */
+	public function register_custom_fields() {
+
+		// Register setting.
+		foreach ( $this->settings as $setting ) {
+			register_setting(
+				$setting['option_group'],
+				$setting['option_name'],
+				( isset( $setting['callback'] ) ) ? $setting['callback'] : ''
+			);
+		}
+
+		// Add settings section.
+		foreach ( $this->sections as $section ) {
+			add_settings_section(
+				$section['id'],
+				$section['title'],
+				( isset( $section['callback'] ) ) ? $section['callback'] : '',
+				$section['page']
+			);
+		}
+
+		// Add settings field.
+		foreach ( $this->fields as $field ) {
+			add_settings_field(
+				$field['id'],
+				$field['title'],
+				( isset( $field['callback'] ) ) ? $field['callback'] : '',
+				$field['page'],
+				$field['section'],
+				( isset( $field['args'] ) ) ? $field['args'] : ''
 			);
 		}
 	}
