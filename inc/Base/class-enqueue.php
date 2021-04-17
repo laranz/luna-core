@@ -25,7 +25,7 @@ class Enqueue {
 
 	/** Function for enqueuing scripts. */
 	public function enqueue() {
-		wp_enqueue_style( 'luna-core-css', LUNA_BASE_URL . 'assets/style.css', array(), '0.0.1' );
-		wp_enqueue_script( 'luna-core-js', LUNA_BASE_URL . 'assets/script.js', array( 'jquery' ), '0.0.1', false );
+		wp_enqueue_style( 'luna-core-css', LUNA_ASSETS . 'css/style.css', array(), '0.0.1' );
+		wp_enqueue_script( 'luna-core-js', LUNA_ASSETS . 'js/script.js', array( 'jquery' ), '0.0.1', false );
 	}
 }

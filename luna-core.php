@@ -37,6 +37,8 @@ define( 'LUNA_BASE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'LUNA_BASE_URL', plugin_dir_url( __FILE__ ) );
 // Constant for plugin's basename.
 define( 'LUNA_BASENAME', plugin_basename( __FILE__ ) );
+// Constant for plugin's assets directory.
+define( 'LUNA_ASSETS', plugin_dir_url( __FILE__ ) . 'assets/' );
 
 // Loading the autoloader.
 if ( file_exists( LUNA_BASE_PATH . '/vendor/autoload.php' ) ) {
@@ -50,6 +52,8 @@ if ( file_exists( LUNA_BASE_PATH . '/vendor/autoload.php' ) ) {
 function activate_luna_core() {
 	Luna\Base\Activator::activate();
 }
+register_activation_hook( __FILE__, 'activate_luna_core' );
+
 
 /**
  * The code that runs during plugin deactivation.
@@ -58,10 +62,6 @@ function activate_luna_core() {
 function deactivate_luna_core() {
 	Luna\Base\Deactivator::deactivate();
 }
-
-// activation.
-register_activation_hook( __FILE__, 'activate_luna_core' );
-// deactivation.
 register_deactivation_hook( __FILE__, 'deactivate_luna_core' );
 
 /**

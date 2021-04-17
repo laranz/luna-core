@@ -20,7 +20,7 @@ namespace Luna;
 final class Init {
 
 	/**
-	 * Store all the needed classes in an array
+	 * Store all the needed classes to be initiated in an array.
 	 *
 	 * @return array | full list of classes.
 	 */
