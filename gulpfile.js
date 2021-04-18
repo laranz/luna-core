@@ -7,12 +7,6 @@
 // Load Gulp...of course.
 const { src, dest, task, watch, series, parallel } = require( 'gulp' );
 
-// Assign the proxy URL for browserSync.
-let proxy = 'https://www.learn.test/wp-admin/admin.php?page=luna_settings';
-
-// Assign a files folder to watch for browserSync.
-let filestowatch = './assets/';
-
 // CSS related plugins.
 let sass         = require( 'gulp-sass' );
 let autoprefixer = require( 'gulp-autoprefixer' );
@@ -26,9 +20,7 @@ let buffer     = require( 'vinyl-buffer' );
 let stripDebug = require( 'gulp-strip-debug' );
 
 // Utility plugins.
-let rename     = require( 'gulp-rename' );
 let sourcemaps = require( 'gulp-sourcemaps' );
-let notify     = require( 'gulp-notify' );
 let plumber    = require( 'gulp-plumber' );
 let options    = require( 'gulp-options' );
 let gulpif     = require( 'gulp-if' );
@@ -37,40 +29,42 @@ let log        = require( 'fancy-log' );
 // Browsers related plugins.
 let browserSync = require( 'browser-sync' ).create();
 
-// Project related variables.
-let styleSRC = './src/scss/style.scss';
-let styleURL = './assets/css/';
-let mapURL   = './';
+// Path Variables.
+const paths = {
+	"proxy":{
+		"url": "https://www.learn.test/wp-admin/admin.php?page=luna_settings"
+	},
+	"styles": {
+		"src": ["./src/scss/**/*.scss"],
+		"dest": "./assets/css/"
+	},
+	"scripts": {
+		"files": ["script.js"],
+		"src": ["./src/js/"],
+		"dest": "./assets/js/",
+	},
+	"images": {
+		"src": "./src/images/**/*",
+		"dest": "./assets/images/"
+	},
+	"php": {
+		"src": "./**/*.php"
+	},
+	"sourceMapURL": {
+		"dest": "./"
+	},
+	"fonts": {
+		"src": "./src/fonts/**/*",
+		"dest": "./assets/fonts/"
+	},
+};
 
-let jsSRC   = './src/js/';
-let jsFront = 'script.js';
-let jsFiles = [ jsFront ];
-let jsURL   = './assets/js/';
-
-let imgSRC = './src/images/**/*';
-let imgURL = './assets/images/';
-
-let fontsSRC = './src/fonts/**/*';
-let fontsURL = './assets/fonts/';
-
-let htmlSRC = './src/**/*.html';
-let htmlURL = './assets/';
-
-let styleWatch = './src/scss/**/*.scss';
-let jsWatch    = './src/js/**/*.js';
-let imgWatch   = './src/images/**/*.*';
-let fontsWatch = './src/fonts/**/*.*';
-let htmlWatch  = './src/**/*.html';
-let phpWatch   = "./**/*.php";
-
-// Tasks.
+// Browser-sync Task for auto refresh.
 function browser_sync() {
 	browserSync.init(
 		{
-			proxy: proxy,
-			files: filestowatch,
-			port: 1710,
-			online: true
+			proxy: paths.proxy.url,
+			files: './assets/',
 		}
 	);
 }
@@ -81,7 +75,7 @@ function reload(done) {
 }
 
 function css(done) {
-	src( [ styleSRC ] )
+	src( paths.styles.src )
 	.pipe( sourcemaps.init() )
 	.pipe(
 		sass(
@@ -93,39 +87,29 @@ function css(done) {
 	)
 	.on( 'error', console.error.bind( console ) )
 	.pipe( autoprefixer() )
-	// .pipe( rename( { suffix: '.min' } ) )
-	.pipe( sourcemaps.write( mapURL ) )
-	.pipe( dest( styleURL ) )
+	.pipe( sourcemaps.write( '.' ) )
+	.pipe( dest( paths.styles.dest ) )
 	.pipe( browserSync.stream() );
-	log( "CSS finished.!" );
 	done();
 }
 
 function js(done) {
-	jsFiles.map(
+	paths.scripts.files.map(
 		function( entry ) {
-			log.info( entry );
 			return browserify(
 				{
-					entries: [jsSRC + entry]
+					entries: [paths.scripts.src + entry]
 				}
 			)
 			.transform( babelify, { presets: [ '@babel/preset-env' ] } )
 			.bundle()
 			.pipe( source( entry ) )
-			// .pipe(
-			// rename(
-			// {
-			// extname: '.min.js'
-			// }
-			// )
-			// )
 			.pipe( buffer() )
 			.pipe( gulpif( options.has( 'production' ), stripDebug() ) )
 			.pipe( sourcemaps.init( { loadMaps: true } ) )
 			.pipe( uglify() )
 			.pipe( sourcemaps.write( '.' ) )
-			.pipe( dest( jsURL ) )
+			.pipe( dest( paths.scripts.dest ) )
 			.pipe( browserSync.stream() );
 		}
 	);
@@ -139,33 +123,27 @@ function triggerPlumber( src_file, dest_file ) {
 }
 
 function images() {
-	return triggerPlumber( imgSRC, imgURL );
+	return triggerPlumber( paths.images.src, paths.images.dest );
 }
 
 function fonts() {
-	return triggerPlumber( fontsSRC, fontsURL );
-}
-
-function html() {
-	return triggerPlumber( htmlSRC, htmlURL );
+	return triggerPlumber( paths.fonts.src, paths.fonts.dest );
 }
 
 function watch_files() {
-	watch( styleWatch, series( css, reload ) );
-	watch( jsWatch, series( js, reload ) );
-	watch( imgWatch, series( images, reload ) );
-	watch( fontsWatch, series( fonts, reload ) );
-	watch( htmlWatch, series( html, reload ) );
-	watch( phpWatch, series( reload ) );
-	// src( jsURL + 'main.min.js', { allowEmpty: true } )
-	// .pipe( notify( { message: 'Gulp is Watching, Happy Coding!' } ) );
-	log( "Gulp is Watching, Happy Coding!" );
+	watch( paths.styles.src, series( css, reload ) );
+	watch( paths.scripts.src, series( js, reload ) );
+	watch( paths.images.src, series( images, reload ) );
+	watch( paths.fonts.src, series( fonts, reload ) );
+	watch( paths.php.src, series( reload ) );
+	log.info( "I am watching for you, Happy Coding!" );
 }
 
 task( "css", css );
 task( "js", js );
 task( "images", images );
 task( "fonts", fonts );
-task( "html", html );
-task( "default", parallel( css, js, images, fonts, html ) );
-task( "watch", parallel( browser_sync, "default", watch_files ) );
+// Create CSS, JS, images  & fonts for production.
+task( "create", parallel( css, js, images, fonts ) );
+// Create, watch and auto-refresh files for dev.
+task( "default", parallel( browser_sync, "create", watch_files ) );
