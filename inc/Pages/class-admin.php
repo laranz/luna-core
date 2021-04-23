@@ -12,6 +12,8 @@ namespace Luna\Pages;
 
 use Luna\Api\SettingsApi;
 use Luna\Api\Callbacks\AdminCallbacks;
+use Luna\Api\Callbacks\ManagerCallbacks;
+use Luna\Base\Base_Controller;
 
 /**
  * A wrapper class for creating admin pages.
@@ -20,7 +22,7 @@ use Luna\Api\Callbacks\AdminCallbacks;
  * @package         Luna_Core
  * @author          laranz
  */
-class Admin {
+class Admin extends Base_Controller {
 	/**
 	 * Storing the SettingsApi instance.
 	 *
@@ -34,6 +36,13 @@ class Admin {
 	 * @var [class instance]
 	 */
 	public $callbacks;
+
+	/**
+	 * Storing the ManagerCallbacks class's instance.
+	 *
+	 * @var [class instance]
+	 */
+	public $manager_callbacks;
 
 
 	/**
@@ -53,8 +62,9 @@ class Admin {
 	/** Register function. */
 	public function register() {
 
-		$this->settings  = new SettingsApi();
-		$this->callbacks = new AdminCallbacks();
+		$this->settings          = new SettingsApi();
+		$this->callbacks         = new AdminCallbacks();
+		$this->manager_callbacks = new ManagerCallbacks();
 
 		$this->set_pages();
 		$this->set_subpages();
@@ -128,13 +138,16 @@ class Admin {
 	 * Set settings for Custom fields.
 	 */
 	public function set_settings() {
-		$args = array(
-			array(
-				'option_group' => 'luna_options_groups',
-				'option_name'  => 'first_name',
-				'callback'     => array( $this->callbacks, 'luna_options_group' ),
-			),
-		);
+
+		$args = array();
+
+		foreach ( $this->managers as $id => $title ) {
+			$args[] = array(
+				'option_group' => 'core_settings',
+				'option_name'  => $id,
+				'callback'     => array( $this->manager_callbacks, 'luna_checkbox_sanitize' ),
+			);
+		}
 
 		$this->settings->add_settings( $args );
 	}
@@ -145,9 +158,9 @@ class Admin {
 	public function set_sections() {
 		$args = array(
 			array(
-				'id'       => 'luna_admin_text',
-				'title'    => __( 'Dashboard Settings', 'luna-core' ),
-				'callback' => array( $this->callbacks, 'luna_admin_section' ),
+				'id'       => 'admin_index',
+				'title'    => __( 'Settings Manager', 'luna-core' ),
+				'callback' => array( $this->manager_callbacks, 'admin_section_manager' ),
 				'page'     => 'luna_settings',
 			),
 		);
@@ -159,19 +172,22 @@ class Admin {
 	 * Set fields for Custom fields.
 	 */
 	public function set_fields() {
-		$args = array(
-			array(
-				'id'       => 'first_name',
-				'title'    => __( 'First Name', 'luna_core' ),
-				'callback' => array( $this->callbacks, 'luna_first_name' ),
+
+		$args = array();
+
+		foreach ( $this->managers as $id => $title ) {
+			$args[] = array(
+				'id'       => $id,
+				'title'    => $title,
+				'callback' => array( $this->manager_callbacks, 'luna_checkbox' ),
 				'page'     => 'luna_settings',
-				'section'  => 'luna_admin_text',
+				'section'  => 'admin_index',
 				'args'     => array(
-					'label_for' => 'first_name',
-					'class'     => 'luna-text-class',
+					'label_for' => $id,
+					'class'     => 'ui-toggle',
 				),
-			),
-		);
+			);
+		}
 
 		$this->settings->add_fields( $args );
 	}

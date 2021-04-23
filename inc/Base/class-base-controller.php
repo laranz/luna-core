@@ -19,16 +19,25 @@ namespace Luna\Base;
  */
 class Base_Controller {
 	/**
-	 * Plugin Path variable
+	 * Store all the managers like CPT, Taxonomy, etc.,
 	 *
 	 * @var string
 	 */
-	public $plugin_path;
+	public $managers;
 
 	/** Constructor to store all the global variables. */
 	public function __construct() {
-		$this->plugin_path = plugin_dir_path(
-			dirname( __FILE__, 2 )
+
+		$this->managers = array(
+			'cpt_manager'          => __( 'Activate CPT Manager', 'luna_core' ),
+			'taxonomy_manager'     => __( 'Activate Taxonomy Manager', 'luna_core' ),
+			'media_widget_manager' => __( 'Activate Media Widget Manager', 'luna_core' ),
+			'gallery_manager'      => __( 'Activate Gallery Manager', 'luna_core' ),
+			'testimonial_manager'  => __( 'Activate Testimonials Manager', 'luna_core' ),
+			'templates_manager'    => __( 'Activate Templates Manager', 'luna_core' ),
+			'login_manager'        => __( 'Activate Login Manager', 'luna_core' ),
+			'membership_manager'   => __( 'Activate Membership Manager', 'luna_core' ),
+			'chat_manager'         => __( 'Activate Chat Manager', 'luna_core' ),
 		);
 	}
 }

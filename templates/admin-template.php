@@ -21,7 +21,7 @@
 		<div id="tab-1" class="tab-pane active">
 			<form method="POST" action="options.php">
 				<?php
-				settings_fields( 'luna_options_groups' );
+				settings_fields( 'core_settings' );
 				do_settings_sections( 'luna_settings' );
 				submit_button();
 				?>

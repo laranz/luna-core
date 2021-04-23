@@ -32,7 +32,7 @@ let browserSync = require( 'browser-sync' ).create();
 // Path Variables.
 const paths = {
 	"proxy":{
-		"url": "https://www.learn.test/wp-admin/admin.php?page=luna_settings"
+		"url": "https://www.learn.site/wp-admin/admin.php?page=luna_settings"
 	},
 	"styles": {
 		"src": ["./src/scss/**/*.scss"],
@@ -65,6 +65,7 @@ function browser_sync() {
 		{
 			proxy: paths.proxy.url,
 			files: './assets/',
+			online: false
 		}
 	);
 }
