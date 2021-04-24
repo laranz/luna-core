@@ -135,19 +135,17 @@ class Admin extends Base_Controller {
 	}
 
 	/**
-	 * Set settings for Custom fields.
+	 * Create a setting field in DB for Custom fields.
 	 */
 	public function set_settings() {
 
-		$args = array();
-
-		foreach ( $this->managers as $id => $title ) {
-			$args[] = array(
+		$args = array(
+			array(
 				'option_group' => 'core_settings',
-				'option_name'  => $id,
+				'option_name'  => 'luna_settings',
 				'callback'     => array( $this->manager_callbacks, 'luna_checkbox_sanitize' ),
-			);
-		}
+			),
+		);
 
 		$this->settings->add_settings( $args );
 	}
@@ -183,8 +181,9 @@ class Admin extends Base_Controller {
 				'page'     => 'luna_settings',
 				'section'  => 'admin_index',
 				'args'     => array(
-					'label_for' => $id,
-					'class'     => 'ui-toggle',
+					'option_name' => 'luna_settings',
+					'label_for'   => $id,
+					'class'       => 'ui-toggle',
 				),
 			);
 		}

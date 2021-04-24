@@ -10,6 +10,8 @@
 
 namespace Luna\Api\Callbacks;
 
+use Luna\Base\Base_Controller;
+
 /**
  * A wrapper class for Callbacks Manager.
  *
@@ -17,17 +19,21 @@ namespace Luna\Api\Callbacks;
  * @package         Luna_Core
  * @author          laranz
  */
-class ManagerCallbacks {
+class ManagerCallbacks extends Base_Controller {
 
 	/**
-	 * Callback for checkbox.
+	 * Sanitization callback for checkbox.
 	 *
-	 * @param $input Inputs
+	 * @param string $input | Getting the value for Sanitize.
 	 *
-	 * @return bool
+	 * @return array
 	 */
 	public function luna_checkbox_sanitize( $input ) {
-		return isset( $input );
+		$output = array();
+		foreach ( $this->managers as $id => $title ) {
+			$output[ $id ] = isset( $input[ $id ] );
+		}
+		return $output;
 	}
 
 	/**
@@ -40,16 +46,20 @@ class ManagerCallbacks {
 	}
 
 	/**
-	 * Callbacks for our text example field.
+	 * Displaying our Checkbox here.
 	 *
-	 * @return void
+	 * @param array $args | array of options for checkbox.
 	 */
 	public function luna_checkbox( $args ) {
 
-		$name     = $args['label_for'];
-		$classes  = $args['class'];
-		$checkbox = esc_attr( get_option( $name ) );
+		$field       = $args['label_for'];
+		$classes     = $args['class'];
+		$option_name = $args['option_name'];
 
-		echo '<div class="' . $classes . '"><input type="checkbox" id="' . $name . '" name="' . $name . '" value="1" class=" ' . $classes . ' " ' . ( $checkbox ? 'checked' : '' ) . '><label for="' . $name . '"><div></div></label></div>';
+		$checkbox = get_option( $option_name );
+		$name     = $option_name . '[' . $field . ']';
+		$checked  = ( $checkbox[ $field ] ? 'checked' : '' );
+
+		echo '<div class="' . $classes . '"><input type="checkbox" id="' . $field . '" name="' . $name . '" value="1" class=" ' . $classes . ' " ' . $checked . '><label for="' . $field . '"><div></div></label></div>';
 	}
 }
