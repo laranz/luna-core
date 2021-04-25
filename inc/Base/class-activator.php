@@ -21,5 +21,18 @@ class Activator {
 	/** A static function which runs after activation */
 	public static function activate() {
 		flush_rewrite_rules();
+
+				$default = array();
+
+		// Setting default value to our options group on activation.
+		// Return if there is already some values present.
+		if ( ! get_option( 'luna_settings' ) ) {
+			update_option( 'luna_settings', $default );
+		}
+
+		if ( ! get_option( 'luna_settings_cpt' ) ) {
+			update_option( 'luna_settings_cpt', $default );
+		}
+
 	}
 }

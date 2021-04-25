@@ -32,12 +32,27 @@ class Base_Controller {
 			'cpt_manager'          => __( 'Activate CPT Manager', 'luna_core' ),
 			'taxonomy_manager'     => __( 'Activate Taxonomy Manager', 'luna_core' ),
 			'media_widget_manager' => __( 'Activate Media Widget Manager', 'luna_core' ),
-			'gallery_manager'      => __( 'Activate Gallery Manager', 'luna_core' ),
 			'testimonial_manager'  => __( 'Activate Testimonials Manager', 'luna_core' ),
 			'templates_manager'    => __( 'Activate Templates Manager', 'luna_core' ),
 			'login_manager'        => __( 'Activate Login Manager', 'luna_core' ),
-			'membership_manager'   => __( 'Activate Membership Manager', 'luna_core' ),
-			'chat_manager'         => __( 'Activate Chat Manager', 'luna_core' ),
 		);
+	}
+
+	/**
+	 * Check the section is enabled in Dashboard or not
+	 *
+	 * @param string $key Pass the manager ID.
+	 *
+	 * @return bool $deactivated Return the deactivated status.
+	 */
+	public function deactivated( $key ) {
+		$option      = get_option( 'luna_settings' );
+		$deactivated = false;
+		if ( isset( $option[ $key ] ) ) {
+			if ( false === $option[ $key ] ) {
+				$deactivated = true;
+			}
+		}
+		return $deactivated;
 	}
 }

@@ -22,14 +22,19 @@ final class Init {
 	/**
 	 * Store all the needed classes to be initiated in an array.
 	 *
-	 * @return array | full list of classes.
+	 * @return array full list of classes.
 	 */
 	public static function get_services() {
 		$classlist = array(
-			Pages\Admin::class,
 			Base\Enqueue::class,
+			Pages\Dashboard::class,
 			Base\Settings_Link::class,
 			Base\Custom_Post::class,
+			Base\Custom_Taxonomy::class,
+			Base\Custom_Media_Widget::class,
+			Base\Custom_Testimonial::class,
+			Base\Custom_Templates::class,
+			Base\Custom_Login::class,
 		);
 		return $classlist;
 	}

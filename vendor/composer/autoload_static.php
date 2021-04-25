@@ -23,16 +23,22 @@ class ComposerStaticInit5936206eda487225ea0867baa7db8cfe
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Luna\\Api\\Callbacks\\AdminCallbacks' => __DIR__ . '/../..' . '/inc/Api/Callbacks/class-admincallbacks.php',
+        'Luna\\Api\\Callbacks\\CPTCallbacks' => __DIR__ . '/../..' . '/inc/Api/Callbacks/class-cptcallbacks.php',
         'Luna\\Api\\Callbacks\\ManagerCallbacks' => __DIR__ . '/../..' . '/inc/Api/Callbacks/class-managercallbacks.php',
         'Luna\\Api\\SettingsApi' => __DIR__ . '/../..' . '/inc/Api/class-settingsapi.php',
         'Luna\\Base\\Activator' => __DIR__ . '/../..' . '/inc/Base/class-activator.php',
         'Luna\\Base\\Base_Controller' => __DIR__ . '/../..' . '/inc/Base/class-base-controller.php',
+        'Luna\\Base\\Custom_Login' => __DIR__ . '/../..' . '/inc/Base/class-custom-login.php',
+        'Luna\\Base\\Custom_Media_Widget' => __DIR__ . '/../..' . '/inc/Base/class-custom-media.php',
         'Luna\\Base\\Custom_Post' => __DIR__ . '/../..' . '/inc/Base/class-custom-post.php',
+        'Luna\\Base\\Custom_Taxonomy' => __DIR__ . '/../..' . '/inc/Base/class-custom-taxonomy.php',
+        'Luna\\Base\\Custom_Templates' => __DIR__ . '/../..' . '/inc/Base/class-custom-templates.php',
+        'Luna\\Base\\Custom_Testimonial' => __DIR__ . '/../..' . '/inc/Base/class-custom-testimonials.php',
         'Luna\\Base\\Deactivator' => __DIR__ . '/../..' . '/inc/Base/class-deactivator.php',
         'Luna\\Base\\Enqueue' => __DIR__ . '/../..' . '/inc/Base/class-enqueue.php',
         'Luna\\Base\\Settings_Link' => __DIR__ . '/../..' . '/inc/Base/class-settings-link.php',
         'Luna\\Init' => __DIR__ . '/../..' . '/inc/class-init.php',
-        'Luna\\Pages\\Admin' => __DIR__ . '/../..' . '/inc/Pages/class-admin.php',
+        'Luna\\Pages\\Dashboard' => __DIR__ . '/../..' . '/inc/Pages/class-dashboard.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

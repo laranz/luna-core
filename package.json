@@ -1,7 +1,7 @@
 {
   "name": "luna-core",
   "version": "1.0.0",
-  "description": "ES6 Compiling, SCSS and fonts handling for Luna Core",
+  "description": "ES6 Compiling, SCSS, browserSync handling for Luna Core",
   "repository": "https://github.com/laranz/",
   "author": "laranz <laranz.joe@gmail.com>",
   "license": "MIT",
@@ -24,7 +24,6 @@
     "gulp-strip-debug": "^3.0.0",
     "gulp-uglify": "^3.0.0",
     "gulp-uglifycss": "^1.0.9",
-    "postcss-reporter": "^7.0.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^2.0.0"
   },
@@ -37,12 +36,6 @@
     "transform": [
       "browserify-shim"
     ]
-  },
-  "browser": {
-    "jquery": "./node_modules/jquery/dist/jquery.js"
-  },
-  "browserify-shim": {
-    "jquery": "$"
   },
   "browserslist": [
     "last 2 versions",

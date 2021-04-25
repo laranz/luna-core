@@ -46,7 +46,7 @@ class ManagerCallbacks extends Base_Controller {
 	}
 
 	/**
-	 * Displaying our Checkbox here.
+	 * Displaying our Checkbox, at last.
 	 *
 	 * @param array $args | array of options for checkbox.
 	 */
@@ -58,7 +58,14 @@ class ManagerCallbacks extends Base_Controller {
 
 		$checkbox = get_option( $option_name );
 		$name     = $option_name . '[' . $field . ']';
-		$checked  = ( $checkbox[ $field ] ? 'checked' : '' );
+
+		// Make the Checkbox check, if the value in DB is true.
+		$checked = '';
+		if ( isset( $checkbox[ $field ] ) ) {
+			if ( true === $checkbox[ $field ] ) {
+				$checked = 'checked';
+			}
+		}
 
 		echo '<div class="' . $classes . '"><input type="checkbox" id="' . $field . '" name="' . $name . '" value="1" class=" ' . $classes . ' " ' . $checked . '><label for="' . $field . '"><div></div></label></div>';
 	}

@@ -22,7 +22,7 @@ use Luna\Base\Base_Controller;
  * @package         Luna_Core
  * @author          laranz
  */
-class Admin extends Base_Controller {
+class Dashboard extends Base_Controller {
 	/**
 	 * Storing the SettingsApi instance.
 	 *
@@ -67,13 +67,11 @@ class Admin extends Base_Controller {
 		$this->manager_callbacks = new ManagerCallbacks();
 
 		$this->set_pages();
-		$this->set_subpages();
-
 		$this->set_settings();
 		$this->set_sections();
 		$this->set_fields();
 
-		$this->settings->add_pages( $this->pages )->with_subpage( __( 'Dashboard', 'luna-core' ) )->add_subpages( $this->subpages )->register();
+		$this->settings->add_pages( $this->pages )->with_subpage( __( 'Dashboard', 'luna-core' ) )->register();
 	}
 	/**
 	 * Settings pages.
@@ -90,46 +88,6 @@ class Admin extends Base_Controller {
 				'callback'   => array( $this->callbacks, 'admin_dashboard' ),
 				'icon_url'   => 'dashicons-store',
 				'position'   => 4,
-			),
-		);
-	}
-
-	/**
-	 * Settings sub pages.
-	 *
-	 * @return void
-	 */
-	public function set_subpages() {
-		$this->subpages = array(
-			'CPT Settings'      => array(
-				'parent_slug' => 'luna_settings',
-				'page_title'  => __( 'CPT Settings', 'luna-core' ),
-				'menu_title'  => __( 'CPT Settings', 'luna-core' ),
-				'capability'  => 'manage_options',
-				'menu_slug'   => 'luna_settings_cpt',
-				'callback'    => function() {
-					echo '<h1>CPT Settings</h1>'; },
-				'position'    => 1,
-			),
-			'Taxonomy Settings' => array(
-				'parent_slug' => 'luna_settings',
-				'page_title'  => __( 'Taxonomy Settings', 'luna-core' ),
-				'menu_title'  => __( 'Taxonomy Settings', 'luna-core' ),
-				'capability'  => 'manage_options',
-				'menu_slug'   => 'luna_settings_taxonomy',
-				'callback'    => function() {
-					echo '<h1>Taxonomy Settings</h1>'; },
-				'position'    => 2,
-			),
-			'Widgets Settings'  => array(
-				'parent_slug' => 'luna_settings',
-				'page_title'  => __( 'Widget Settings', 'luna-core' ),
-				'menu_title'  => __( 'Widget Settings', 'luna-core' ),
-				'capability'  => 'manage_options',
-				'menu_slug'   => 'luna_settings_widgets',
-				'callback'    => function() {
-					echo '<h1>Widgets Settings</h1>'; },
-				'position'    => 3,
 			),
 		);
 	}

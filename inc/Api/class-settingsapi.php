@@ -52,7 +52,7 @@ class SettingsApi {
 
 	/** Register globally. */
 	public function register() {
-		if ( ! empty( $this->admin_pages ) ) {
+		if ( ! empty( $this->admin_pages ) || ! empty( $this->admin_subpages ) ) {
 			add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 		}
 		if ( ! empty( $this->settings ) ) {
