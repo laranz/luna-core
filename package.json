@@ -37,6 +37,9 @@
       "browserify-shim"
     ]
   },
+  "browserify-shim": {
+    "jquery": "$"
+  },
   "browserslist": [
     "last 2 versions",
     "> 5%",

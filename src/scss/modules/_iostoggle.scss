@@ -61,5 +61,5 @@ $bg: #d9cb9e;
 }
 
 div.ui-toggle{
-  @include ui-toggle(20px, $on, $off);
+  @include ui-toggle(25px, $on, $off);
 }

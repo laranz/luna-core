@@ -40,7 +40,7 @@
 				echo '</form> ';
 
 				echo '<form method="post" action="options.php" class="inline-block">';
-				settings_fields( 'alecaddd_plugin_cpt_settings' );
+				settings_fields( 'core_settings_cpt' );
 				echo '<input type="hidden" name="remove" value="' . $post_type['post_type'] . '">';
 				submit_button(
 					'Delete',
@@ -48,7 +48,7 @@
 					'submit',
 					false,
 					array(
-						'onclick' => 'return confirm("Are you sure you want to delete this Custom Post Type? The data associated with it will not be deleted.");',
+						'onclick' => 'return confirm("Are you sure you want to delete this Custom Post Type? The data associated with it will not be deleted!");',
 					)
 				);
 				echo '</form></td></tr>';

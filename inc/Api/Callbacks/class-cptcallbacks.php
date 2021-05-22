@@ -79,9 +79,9 @@ class CPTCallbacks {
 	}
 
 	/**
-	 * Displaying our Text Field.
+	 * Displaying our Checkbox Field.
 	 *
-	 * @param array $args | array of options for Textbox.
+	 * @param array $args | array of options for Checkbox.
 	 */
 	public function luna_checkbox( $args ) {
 
