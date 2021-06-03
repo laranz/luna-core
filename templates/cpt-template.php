@@ -23,39 +23,42 @@
 	<div class="tab-content">
 		<div id="tab-1" class="tab-pane active">
 			<h3>Manage your Custom Post Types.</h3>
-			<?php
-			$post_types = get_option( 'luna_settings_cpt', array() );
+			<div class="table-roundcorner">
+				<?php
+					$post_types = get_option( 'luna_settings_cpt', array() );
 
-			echo '<table class="cpt-table"><tr><th>ID</th><th>Singular Name</th><th>Plural Name</th><th class="text-center">Public</th><th class="text-center">Archive</th><th class="text-center">Actions</th></tr>';
+					echo '<table class="cpt-table"><tr><th>Post Slug</th><th>Singular Name</th><th>Plural Name</th><th class="text-center">Public</th><th class="text-center">Archive</th><th class="text-center">Actions</th></tr>';
 
-			foreach ( $post_types as $post_type ) {
-				$public  = isset( $post_type['public'] ) ? 'TRUE' : 'FALSE';
-				$archive = isset( $post_type['has_archive'] ) ? 'TRUE' : 'FALSE';
+				foreach ( $post_types as $post_type ) {
+					$public  = isset( $post_type['public'] ) ? 'TRUE' : 'FALSE';
+					$archive = isset( $post_type['has_archive'] ) ? 'TRUE' : 'FALSE';
 
-				echo "<tr><td>{$post_type['post_type']}</td><td>{$post_type['singular_name']}</td><td>{$post_type['plural_name']}</td><td class=\"text-center\">{$public}</td><td class=\"text-center\">{$archive}</td><td class=\"text-center\">";
+					echo "<tr><td>{$post_type['post_type']}</td><td>{$post_type['singular_name']}</td><td>{$post_type['plural_name']}</td><td class=\"text-center\">{$public}</td><td class=\"text-center\">{$archive}</td><td class=\"text-center\">";
 
-				echo '<form method="post" action="" class="inline-block">';
-				echo '<input type="hidden" name="edit_post" value="' . $post_type['post_type'] . '">';
-				submit_button( 'Edit', 'primary small', 'submit', false );
-				echo '</form> ';
+					echo '<form method="post" action="" class="inline-block">';
+					echo '<input type="hidden" name="edit_post" value="' . $post_type['post_type'] . '">';
+					submit_button( 'Edit', 'primary small', 'submit', false );
+					echo '</form> ';
 
-				echo '<form method="post" action="options.php" class="inline-block">';
-				settings_fields( 'core_settings_cpt' );
-				echo '<input type="hidden" name="remove" value="' . $post_type['post_type'] . '">';
-				submit_button(
-					'Delete',
-					'delete small',
-					'submit',
-					false,
-					array(
-						'onclick' => 'return confirm("Are you sure you want to delete this Custom Post Type? The data associated with it will not be deleted!");',
-					)
-				);
-				echo '</form></td></tr>';
-			}
+					echo '<form method="post" action="options.php" class="inline-block">';
+					settings_fields( 'core_settings_cpt' );
+					echo '<input type="hidden" name="remove" value="' . $post_type['post_type'] . '">';
+					submit_button(
+						'Delete',
+						'delete small',
+						'submit',
+						false,
+						array(
+							'onclick' => 'return confirm("Are you sure you want to delete this Custom Post Type? The data associated with it will not be deleted!");',
+						)
+					);
+					echo '</form></td></tr>';
+				}
 
-			echo '</table>';
-			?>
+					echo '</table>';
+				?>
+			</div>
+
 		</div>
 		<div id="tab-2" class="tab-pane">
 			<form method="POST" action="options.php">
