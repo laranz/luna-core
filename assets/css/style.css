@@ -4,140 +4,145 @@
  * @package luna-core
  */
 .nav-tabs {
-  float: left;
-  width: 100%;
-  margin: 0;
-  list-style-type: none;
-  border-bottom: 1px solid transparent;
+	float: left;
+	width: 100%;
+	margin: 0;
+	list-style-type: none;
+	border-bottom: 1px solid transparent;
 }
 
 .nav-tabs > li {
-  float: left;
-  margin-bottom: -2px;
+	float: left;
+	margin-bottom: -2px;
 }
 
 .nav-tabs > li > a {
-  margin-right: 2px;
-  line-height: 1.5;
-  padding: 10px;
-  border: 1px solid transparent;
-  border-radius: 4px 0;
-  float: left;
-  text-decoration: none;
+	margin-right: 2px;
+	line-height: 1.5;
+	padding: 10px;
+	border: 1px solid transparent;
+	float: left;
+	text-decoration: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border-radius: 20px 20px 0 0;
 }
 
 .nav-tabs > li > a:hover {
-  border-color: #eee #eee #ddd;
+	border-color: #eee #eee #ddd;
+	background: #fff;
 }
 
 .nav-tabs > li.active > a,
-.nav-tabs > li.active > a:hover,
-.nav-tabs > li.active > a:focus {
-  color: #555;
-  cursor: default;
-  background-color: white;
-  border-bottom: 1px solid #ddd;
+.nav-tabs > li.active > a:hover {
+	color: #555;
+	cursor: default;
+	background-color: #fff;
+	border-bottom: 1px solid #ddd;
 }
 
 .tab-content > .tab-pane {
-  display: none;
-  width: 98%;
-  float: left;
+	display: none;
+	width: 98%;
+	float: left;
 }
 
 .tab-content > .tab-pane.active {
-  display: block;
-  padding: 10px;
-  background-color: #fff;
-  -webkit-box-shadow: 0 1px 5px -2px rgba(0, 0, 0, 0.15);
-          box-shadow: 0 1px 5px -2px rgba(0, 0, 0, 0.15);
+	display: block;
+	padding: 10px;
+	background-color: #fff;
+	-webkit-box-shadow: 0 1px 5px -2px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 1px 5px -2px rgba(0, 0, 0, 0.15);
 }
 
 div.ui-toggle {
-  margin: 0;
-  padding: 0;
-}
-
-div.ui-toggle input[type="checkbox"] {
-  display: none;
-}
-
-div.ui-toggle input[type="checkbox"]:checked + label {
-  border-color: #009eea;
-  background: #009eea;
-  -webkit-box-shadow: inset 0 0 0 12.5px #009eea;
-          box-shadow: inset 0 0 0 12.5px #009eea;
-}
-
-div.ui-toggle input[type="checkbox"]:checked + label > div {
-  margin-left: 25px;
+	margin: 0;
+	padding: 0;
 }
 
 div.ui-toggle label {
-  -webkit-transition: all 200ms ease;
-  transition: all 200ms ease;
-  display: inline-block;
-  position: relative;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  background: #8c8c8c;
-  -webkit-box-shadow: inset 0 0 0 0 #009eea;
-          box-shadow: inset 0 0 0 0 #009eea;
-  border: 2px solid #8c8c8c;
-  width: 50px;
-  height: 25px;
-  border-radius: 27px;
+	-webkit-transition: all 200ms ease;
+	transition: all 200ms ease;
+	display: inline-block;
+	position: relative;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background: #8c8c8c;
+	-webkit-box-shadow: inset 0 0 0 0 #009eea;
+	box-shadow: inset 0 0 0 0 #009eea;
+	border: 2px solid #8c8c8c;
+	width: 50px;
+	height: 25px;
+	border-radius: 27px;
 }
 
 div.ui-toggle label div {
-  -webkit-transition: all 200ms ease;
-  transition: all 200ms ease;
-  background: #ffffff;
-  width: 25px;
-  height: 25px;
-  border-radius: 12.5px;
+	-webkit-transition: all 200ms ease;
+	transition: all 200ms ease;
+	background: #fff;
+	width: 25px;
+	height: 25px;
+	border-radius: 12.5px;
 }
 
 div.ui-toggle label:hover,
 div.ui-toggle label > div:hover {
-  cursor: pointer;
+	cursor: pointer;
+}
+
+div.ui-toggle input[type="checkbox"] {
+	display: none;
+}
+
+div.ui-toggle input[type="checkbox"]:checked + label {
+	border-color: #009eea;
+	background: #009eea;
+	-webkit-box-shadow: inset 0 0 0 12.5px #009eea;
+	box-shadow: inset 0 0 0 12.5px #009eea;
+}
+
+div.ui-toggle input[type="checkbox"]:checked + label > div {
+	margin-left: 25px;
 }
 
 .table-roundcorner {
-  width: 100%;
-  overflow: hidden;
-  border-radius: 20px;
-  border: 1px solid #f2f2f2;
+	width: 100%;
+	overflow: hidden;
+	border-radius: 20px;
+	border: 1px solid #f2f2f2;
 }
 
 .cpt-table {
-  width: 100%;
-  border-spacing: 5px;
-  text-align: left;
+	width: 100%;
+	border-spacing: 5px;
+	text-align: left;
 }
 
 .cpt-table,
 .cpt-table th,
 .cpt-table td {
-  border-bottom: 1px solid #f2f2f2;
-  border-collapse: collapse;
-  padding: 20px;
+	border-bottom: 1px solid #f2f2f2;
+	border-collapse: collapse;
+	padding: 20px;
+}
+
+.cpt-table tr:hover {
+	background: #f5f5f5;
+	cursor: pointer;
 }
 
 .cpt-table th {
-  background-color: #f5f5f5;
-  padding: 20px;
-  font-size: 16px;
+	background-color: #f5f5f5;
+	padding: 20px;
+	font-size: 16px;
 }
 
 .text-center {
-  text-align: center;
+	text-align: center;
 }
 
 .inline-block {
-  display: inline-block;
+	display: inline-block;
 }
-
-/*# sourceMappingURL=style.css.map */

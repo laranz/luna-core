@@ -7,11 +7,14 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
+    "@wordpress/babel-preset-default": "^6.2.0",
+    "@wordpress/eslint-plugin": "^9.0.6",
+    "@wordpress/stylelint-config": "^19.0.5",
     "babelify": "^10.0.0",
     "browser-sync": "^2.26.3",
     "browserify": "^17.0.0",
     "browserify-shim": "^3.8.14",
+    "eslint": "^7.28.0",
     "fancy-log": "^1.3.3",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^7.0.1",
@@ -22,14 +25,16 @@
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-strip-debug": "^3.0.0",
+    "gulp-stylelint": "^13.0.0",
     "gulp-uglify": "^3.0.0",
     "gulp-uglifycss": "^1.0.9",
+    "stylelint": "^13.13.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^2.0.0"
   },
   "babel": {
     "presets": [
-      "@babel/preset-env"
+      "@wordpress/default"
     ]
   },
   "browserify": {
@@ -44,5 +49,14 @@
     "last 2 versions",
     "> 5%",
     "Firefox ESR"
-  ]
+  ],
+  "scripts": {
+    "lint": "eslint src/js/**/*.js",
+    "lint:fix": "eslint src/js/**/*.js --fix",
+    "stylelint": "stylelint src/scss/**/*.scss",
+    "stylelint:fix": "stylelint src/scss/**/*.scss --fix"
+  },
+  "dependencies": {
+    "gulp-eslint": "^6.0.0"
+  }
 }
